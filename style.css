@@ -1,0 +1,203 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans|Open+Sans);
+
+body{
+	background-color: ghostwhite;
+    font-family: 'Open Sans', sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rainy-background{
+	background: url('img/bgs/rain_bg-01.png');
+}
+
+.registration_block{
+	display: none;
+	position: fixed;
+	width: 800px;
+	height: 200px;
+	top: 200px;
+	left: 15%;
+	background-color: white;
+	z-index: 1000;
+}
+
+#registration-name{
+	display: none;
+}
+
+#registration-location{
+	display: none;
+}
+
+.wrapper{
+	display: block;
+	width: 50%;
+	height: auto;
+	margin: 0 auto;
+	background-color: blue;
+	z-index: 900;
+	overflow: hidden;
+}
+.logo{
+	width: 20%;
+	height: auto;
+	display: block;
+	margin: 5px auto;
+
+}
+
+.timedate{
+	/*display: none;*/
+}
+.weather{
+	width: 300px;
+	display: block;
+	margin: 10px auto;
+	text-align: center;
+	color: ghostwhite;
+}
+
+.weather span{
+	margin-top: 10px;
+}
+.weather #location, #temperature{
+	display: inline-block;
+	font-size: 1.8em;
+	margin-top: 20px;
+}
+.weather #wind {
+	display:  block;
+}
+.greeting{
+	background-color: rgba(4, 4, 4, 0.28);
+	position: absolute;
+	top: 35vh;
+	right: 0px;
+	left: 0px;
+	width: 100%;
+	font-size: 2rem;
+	color: ghostwhite;
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.greeting #message{
+	font-size: 0.8rem;
+}
+
+#message img{
+	width: 30px;
+	height: auto;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.trends{
+	width: 100%;
+	position: absolute;
+	display: block;
+	top: 65vh;
+	left: 0;
+	right: 0;
+}
+
+.trends .hotTrends{
+	display: block;
+	background-color: ghostwhite;	
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	margin: 0 auto;
+	text-align: center;
+	border: 3px solid rgba(0, 0, 0, 0.53);	
+}
+
+.trends .hotTrends span {
+	font-size: 1rem;
+	margin: 0;
+	position: relative;
+	top: 23%;
+	left: 0px;
+}
+
+.spring{
+	position: absolute;
+	left: 25%;
+	top: 15px;
+	background-color: #91B8D5;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	margin: 0 auto;
+	text-align: center;
+	border: 3px solid rgba(0, 0, 0, 0.53);	
+
+}
+
+.spring button{
+	width: 90%;
+	height: auto;
+	border-radius: none;
+	position: relative;
+	top: 18px;
+}
+
+.swHelsinki{
+	position: absolute;
+	right: 25%;
+	top: 15px;
+	background-color: #3CCF80;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	margin: 0 auto;
+	text-align: center;
+	border: 3px solid rgba(0, 0, 0, 0.53);	
+}
+
+.swHelsinki button{
+	width: 90%;
+	height: auto;
+	border-radius: none;
+	position: relative;
+	top: 18px;
+}
+
+#insta{
+	display: block;
+	width: 96%;
+	margin: 0 auto;
+}
+
+#insta img{
+	width: 30%;
+	height: auto;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+#back{
+	display: none;
+	width: 20px;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+.spring img {
+	 
+	width: 90%;
+	height: auto;
+	border-radius: none;
+	position: relative;
+	top: 3px;
+}
+.swHelsinki img {
+	 
+	width: 60%;
+	height: auto;
+	border-radius: none;
+	position: relative;
+	top: 10px;
+}

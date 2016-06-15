@@ -1,0 +1,93 @@
+.morningSkyClear{
+	background: #a4c0d9; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#62bcea, #8abee3, #a4c0d9, #cec6ce, #f0cbc3); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#62bcea, #8abee3, #a4c0d9, #cec6ce, #f0cbc3); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#62bcea, #8abee3, #a4c0d9, #cec6ce, #f0cbc3); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#62bcea, #8abee3, #a4c0d9, #cec6ce, #f0cbc3); /* Standard syntax */
+    background-repeat: no-repeat;
+}
+
+.daySkyClear {
+	background: #64a6d6; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#2674b3, #388dc7 , #64a6d6, #9bc5e7, #c4def4); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#2674b3, #388dc7 , #64a6d6, #9bc5e7, #c4def4); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#2674b3, #388dc7 , #64a6d6, #9bc5e7, #c4def4); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#2674b3, #388dc7 , #64a6d6, #9bc5e7, #c4def4); /* Standard syntax */
+    background-repeat: no-repeat;
+}
+
+.eveningSkyClear  {
+	background: #8c71a2; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#585d9c, #71669e, #8c71a2, #aa80a4, #ca90a7 ); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#585d9c, #71669e, #8c71a2, #aa80a4, #ca90a7 ); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#585d9c, #71669e, #8c71a2, #aa80a4, #ca90a7 ); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#585d9c, #71669e, #8c71a2, #aa80a4, #ca90a7 ); /* Standard syntax */
+    background-repeat: no-repeat;
+}
+
+.nightSkyClear  {
+	background: #8c71a2; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( #231b4a, #2e2654,  #3b3662 , #494672, #5d5989 ); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#231b4a, #2e2654,  #3b3662 , #494672, #5d5989 ); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#231b4a, #2e2654,  #3b3662 , #494672, #5d5989 ); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#231b4a, #2e2654,  #3b3662 , #494672, #5d5989 ); /* Standard syntax */
+    background-repeat: no-repeat;
+}
+
+
+.badWeatherBlur{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(47,41,41,0.30);
+}
+
+.rainyDay {
+
+}
+
+.cloudsForRainyDay{
+	display: none;
+	z-index: 1020;
+}
+
+
+
+.cloudsInRain{
+	display: none;
+}
+
+#darkcloud1{
+	position: absolute;
+	top: 20px;
+	left: 50px;
+	width: 300px;
+	height: auto;
+}
+
+#darkcloud2{
+	position: absolute;
+	top: 20px;
+	right: 50px;
+}
+
+#darkcloud3{
+	position: absolute;
+	top: 400px;
+	left: 90px;
+}
+
+#darkcloud4{
+	position: absolute;
+	top: 300px;
+	right: 150px;
+	width: 300px;
+	height: auto;
+
+}
+
+#darkcloud5{
+	position: absolute;
+	top: 200px;
+	right: 700px;
+
+}

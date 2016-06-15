@@ -1,0 +1,109 @@
+<!doctype>
+<html>
+<head>
+	<title>Fashion Forecsat</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="backgrounds.css">
+	
+</head>
+<body>
+	<div id="blur">
+		<!-- section that collects the data about user if he comes for the firts time - gender and location -->
+		<!-- Throw at the first vsit + add to settings -->
+		<div class="registration_block">
+			<div id="registration-name">
+				<h1>User Info</h1>
+				<label>Name:</label>
+				<input type="test" value="what is your name?" id="userName">
+				<button class="saveYourName">Continue</button>
+			</div>
+			<div id="registration-location">
+				<select  class="selectLocation">
+				</select>
+				<button class="selectLocationButton">Save</button>
+			</div>
+
+		</div>
+
+
+		<div class="clodsForSunnyDay">
+
+		</div>
+
+		<div class="cloudsForRainyDay">
+			<img src="img/clouds/darkClouds/graycloud1.png" id="darkcloud1">
+			<img src="img/clouds/darkClouds/graycloud2.png" id="darkcloud2">
+			<img src="img/clouds/darkClouds/graycloud3.png" id="darkcloud3">
+			<img src="img/clouds/darkClouds/graycloud4.png" id="darkcloud4">
+			<img src="img/clouds/darkClouds/graycloud5.png" id="darkcloud5">
+
+		</div>
+		
+			
+		
+
+		<!-- First view to display - what kind of occasion you should go to -->
+
+		<!--<h1>Fashion Forecast</h1>-->
+		<!--<img src="img/FF.svg" class="logo">-->
+		<div id="wrapper">
+			<div class="timedate">
+				<!-- display date here-->
+				<span id="date"></span>
+				<!-- display time here-->
+				<span id="time"></span>
+			</div>
+			
+			<!-- display weather here-->
+			<div class="weather">
+				<span id="location"></span>
+				<span id="temperature"></span>
+				<span id="wind"></span>
+			</div>
+
+			<div id="info">
+				<div class="greeting">
+					<div id="greet"></div>
+					<span id="message"></span>
+				</div>
+				<div class="trends">
+					<!--<input type="button"  value="SWHelsinki" >-->
+					<div class="hotTrends">
+						<span>Get Inspired</span>
+					</div>
+					<div class="spring">
+						<!--<button ></button>-->
+							<img src="img/casual.png" id="spring">
+					</div>
+					<div class="swHelsinki">
+						<!--<button >SWHelsinki</button>-->
+						<img id="swhelsinki" src="img/medical.svg">
+					</div>
+				</div>
+			</div>
+			
+
+			<!-- DISPLAY INSTAGRAM OUTPUT HERE -->
+			<div>
+				<img id="back" src="img/arrows.svg">
+				<div id="insta"></div>
+			</div>
+			
+		</div>
+	</div>
+	
+	
+	<!--                 SCRIPTS                 -->	
+	<script type="text/javascript" src="js/lib/jquery-2.2.3.js"></script>
+ 	<script type="text/javascript" src="js/globalObjects.js"></script>
+	<script type="text/javascript" src="js/location.js"></script>
+	<script type="text/javascript" src="js/time.js"></script>
+	<script type="text/javascript" src="js/weather.js"></script>
+	<script type="text/javascript" src="js/user.js"></script>
+	<script type="text/javascript" src="js/instagram.js"></script>
+	<script type="text/javascript" src="js/firstFired.js"></script>
+	
+	
+</body>
+</html>
