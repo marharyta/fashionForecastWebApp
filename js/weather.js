@@ -8,7 +8,7 @@ var weather = function(){
 		displayTemperature: displayTemperature,
 		displayWind: displayWind,
 		displayLocation: displayLocation,
-		httpRequestWeather: httpRequestWeather,
+		httpRequestWeatherForNow: httpRequestWeatherForNow,
 		getWeatherInfoAsync: getWeatherInfoAsync,
 		getWeatherObj: getWeatherObj
 	}
@@ -69,7 +69,7 @@ var weather = function(){
 		
 	}
 
-	function httpRequestWeather(url) {
+	function httpRequestWeatherForNow(url) {
 	  	return new Promise(function(resolve, reject) {
 		    var weatherRequest = new XMLHttpRequest();
 		    weatherRequest.open("GET", url, true);
@@ -103,7 +103,7 @@ var weather = function(){
 
 
 	function getWeatherInfoAsync(userCity){
-			var weatherPromise = weather.httpRequestWeather("http://api.openweathermap.org/data/2.5/weather?q=" + userCity + "&appid=0b80560c4a970c01ef20235a6a8b6dcd");
+			var weatherPromise = weather.httpRequestWeatherForNow("http://api.openweathermap.org/data/2.5/weather?q=" + userCity + "&appid=0b80560c4a970c01ef20235a6a8b6dcd");
 			return weatherPromise.then(responseText => JSON.parse(responseText));
 		}
 

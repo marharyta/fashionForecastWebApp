@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 var userlocation = function(){
 
 	//to do: set local storage get to var
@@ -140,52 +138,5 @@ var userlocation = function(){
 
 
 }();
-
-
-/*(function populateLocationsSelector(){
-	var parent = document.getElementsByClassName("selectLocation")[0];
-	var locationList = AVAILABLE_LOCATION_LIST;
-	for(var i=0; i < locationList.length; i++ ){
-		console.log(locationList[i].name);
-		var location = document.createElement("OPTION");
-		location.innerHTML = locationList[i].name;
-		location.value = locationList[i].name;
-		parent.appendChild(location);
-	}
-})();*/
-
-
-/*function getCityChoice(selectedCity){
-	console.log("selectedCity", selectedCity);
-	copy_selectedCity  = selectedCity;
-	
-}*/
-
-/*function saveCityToLocalStorage(){
-	if(localStorage.getItem("user.city") === copy_selectedCity)
-	{
-		console.log("city exists!");
-	}
-	else{
-		localStorage.setItem("user.city", copy_selectedCity);
-		console.log("final selection", copy_selectedCity);
-	}
-} */
-
-/*function getLocationSelectorValue(){
-	var selectedValue = document.getElementsByClassName("selectLocation")[0].selectedIndex;
-	var selectedCity = document.getElementsByTagName("option")[selectedValue].value;
-	console.log(document.getElementsByTagName("option")[selectedValue].value);
-	getCityChoice(selectedCity);
-}*/
-
-/*function watchSelectorChanged() {
-    var watch = document.getElementsByClassName("selectLocation")[0].addEventListener("change", getLocationSelectorValue);
-};*/
-
-/*(function watchSaveButton(){
-	document.getElementsByClassName("selectLocationButton")[0].addEventListener("click", saveCityToLocalStorage);
-return Å
-})();*/
 
 
