@@ -9,6 +9,7 @@ var weather = function(){
 		displayWind: displayWind,
 		displayLocation: displayLocation,
 		httpRequestWeatherForNow: httpRequestWeatherForNow,
+		httpRequestWeatherForFiveDays: httpRequestWeatherForFiveDays,
 		getWeatherInfoAsync: getWeatherInfoAsync,
 		getWeatherObj: getWeatherObj
 	}
@@ -70,6 +71,38 @@ var weather = function(){
 	}
 
 	function httpRequestWeatherForNow(url) {
+	  	return new Promise(function(resolve, reject) {
+		    var weatherRequest = new XMLHttpRequest();
+		    weatherRequest.open("GET", url, true);
+
+			weatherRequest.onreadystatechange = function() {
+			  	if(this.readyState == 0){
+			  		console.log("request not initialized ");
+			  	}
+			  	else if(this.readyState == 1){
+			  		console.log("server connection established");
+			  	}
+			  	else if(this.readyState == 2){
+			  		console.log(" request received ");
+			  	}
+			  	else if(this.readyState == 3){
+			  		console.log(" processing request ");
+			  	}
+			    else if (this.readyState == 4 && this.status == 200) {
+			     	console.log("request finished and response is ready");
+			     	console.log(this.response);
+			     	resolve(this.response);
+			    }
+			    else{
+			    	reject(new Error("no weather data"));
+			    }
+			  };
+		  	weatherRequest.send();
+	  });
+
+	}
+
+	function httpRequestWeatherForFiveDays(url) {
 	  	return new Promise(function(resolve, reject) {
 		    var weatherRequest = new XMLHttpRequest();
 		    weatherRequest.open("GET", url, true);
