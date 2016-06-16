@@ -1,5 +1,6 @@
 'use strict';
 
+
 var userlocation = function(){
 
 	//to do: set local storage get to var

@@ -1,0 +1,22 @@
+@keyframes show {
+    0%   { height: 100px; top:200px;}
+    25%  { height: 300px; top:100px;}
+    50%  { height: 500px; top:600px;}
+    75%  { height: 700px;  top:700px;}
+    100% { height: 900px;  top:900px;}
+}
+
+.fiveDayForecast_hide{
+	display: none;
+}
+
+.fiveDayForecast_show{
+	display: block;	
+	background-color: white;
+	width: 100%;
+    position: absolute;
+    left:0px;
+   top: 20px;
+   height: 900px;
+    z-index: 2000;
+}

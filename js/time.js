@@ -65,6 +65,7 @@ var time = function() {
 
 
 	function refreshTimer(){
+		//.showGreetingToUser();
 		setInterval(() => time.showGreetingToUser(), 1000);
 	}
 
