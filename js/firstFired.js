@@ -4,30 +4,46 @@ time.refreshTimer();
 function getLocationAsync(){
 
 	return userlocation.getLocationDataAsync()
-	.then(function(response){ 
-		userlocation.displayLocation(response.city);
-		return response.city;
-	})
-	.then(function(value){
-		return weather.getWeatherInfoAsync(value);
-	})
-	.then(weather.getWeatherObj)
-	.then(weatherObj => {
-			weather.displayWeather(weatherObj);
-			return weatherObj;
-	})
+		.then(response => { 
+			userlocation.displayLocation(response.city);
+			return response.city;
+		});
+}
+
+function updateWeatherNowAsync() {
+	return _locationPromise
+		.then(userLocation => weather.getWeatherInfoAsync(userLocation, "http://api.openweathermap.org/data/2.5/weather?q=", weatherAPIToken))
+		.then(weather.getWeatherObj)
+		.then(weatherObj => {
+				weather.displayWeather(weatherObj);
+				return weatherObj;
+		})
+		.catch(err => console.log("no data for you :(", err));
 	//.then(weatherObj => instagram.getSummutAsync(weatherObj.param)) // отправить запрос на фотки
-	//.then(response => ...) // отобразить фотки из ответа
-	.catch(err => console.log("no data for you :(", err));;
+	//.then(response => ...) // отобразить фотки из ответа;
 }
 
-getLocationAsync();
-updateWeatherAsync();
-setInterval(updateWeatherAsync, 30000);
+let _locationPromise = getLocationAsync();
 
-function updateWeatherAsync() {
-	return true;
-}
+updateWeatherNowAsync();
+
+setInterval(updateWeatherNowAsync, 30*1000);
+function callFiveDays(){
+		return _locationPromise
+			.then(userLocation => weather.getWeatherInfoAsync(userLocation, "http://api.openweathermap.org/data/2.5/forecast?q=", weatherAPIToken))
+			.then(function(value){
+				return weather.getWeatherForecastList(value);
+			})
+			.then(function(value){
+
+				weather.displayWeatherConditionTable(value);
+				return value;
+			})
+			.catch(err => console.log("no data for you :(", err));
+
+	}
+
+document.getElementById("classnayaKnopka").addEventListener("click",callFiveDays);
 
 
 var user = new User(null, null);
