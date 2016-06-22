@@ -34,10 +34,11 @@ function callFiveDays(){
 			.then(function(value){
 				return weather.getWeatherForecastList(value);
 			})
-			.then(function(value){
+			.then(function(array){
 
-				weather.displayWeatherConditionTable(value);
-				return value;
+				weather.displayWeatherConditionTable(array);
+				var weatherDayObj = weather.sortWeatherByDay(array);
+				return array;
 			})
 			.catch(err => console.log("no data for you :(", err));
 
