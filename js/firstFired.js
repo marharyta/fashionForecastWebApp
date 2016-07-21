@@ -1,8 +1,7 @@
 time.refreshTimer();
 
-
+var defaultCity = 'Helsinki';
 function getLocationAsync(){
-
 	return userlocation.getLocationDataAsync()
 		.then(response => { 
 			userlocation.displayLocation(response.city);
@@ -10,9 +9,17 @@ function getLocationAsync(){
 		});
 }
 
+function getDefaultCity(){
+	return defaultCity;
+}
+
+var myCity = getDefaultCity();
+
 function updateWeatherNowAsync() {
-	return _locationPromise
+	return //_locationPromise
+		myCity
 		.then(userLocation => weather.getWeatherInfoAsync(userLocation, "http://api.openweathermap.org/data/2.5/weather?q=", weatherAPIToken))
+		//.then(userLocation => weather.getWeatherInfoAsync(defaultCity, "http://api.openweathermap.org/data/2.5/weather?q=", weatherAPIToken))
 		.then(weather.getWeatherObj)
 		.then(weatherObj => {
 				weather.displayWeather(weatherObj);
@@ -38,7 +45,10 @@ function callFiveDays(){
 
 				weather.displayWeatherConditionTable(array);
 				var weatherDayObj = weather.sortWeatherByDay(array);
-				return array;
+				return weatherDayObj;
+			})
+			.then(function(array){
+				weather.displayWeatherByDays(array);
 			})
 			.catch(err => console.log("no data for you :(", err));
 

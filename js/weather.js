@@ -239,6 +239,7 @@ var weather = function(){
 			var currentObjDate = weather.getWeatherConditionObj(currentValue);
 			var currentDate = new Date(currentObjDate.date_time).getDate();
 			if( currentDate === today){
+				//debug
 				listOfdays.map(function(item){
 					if(item.day === today){
 						item.list.push(currentObjDate);
@@ -258,8 +259,6 @@ var weather = function(){
 
   			return  listOfdays;
 		});
-
-
 		return listSortedByDays;
 	}
 
@@ -268,11 +267,16 @@ var weather = function(){
 		var el = document.getElementById("fiveDayForecast");
 		el.className = "";
 		el.className = "fiveDayForecast_show";
+		var ul = document.createElement("UL");
+		ul.id = "conditionList";
+		el.appendChild(ul);
 		
 		for (var i = 0; i < listSortedByDays.length; i++) {
-			var div = document.createElement("DIV");
-			//ul.id = "conditionList";
-			el.appendChild(div);
+			var li = document.createElement("LI");
+			var date = document.createTextNode(" " + listSortedByDays[i].day);
+			li.className = "inline-list";
+			ul.appendChild(li);
+			li.appendChild(date);
 		};
 	}
 	
