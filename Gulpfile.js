@@ -13,12 +13,18 @@ var server = {
 	host: '0.0.0.0',
 	port: '9000'
 }
+var livereloadExclude = [
+	'scss',
+	'sass',
+	'map'
+]
 
 gulp.task('styles', function() {
 	gulp.src(sourcePaths.styles)
 		.pipe(compass({
 			config_file:	'./config.rb',
-			css:			distPaths.styles
+			css:			distPaths.styles,
+			sourcemap:		true 
 		}))
 		.pipe(sass().on('error', sass.logError))
 });
@@ -33,8 +39,8 @@ gulp.task('webserver', function() {
 			livereload: {
 				enable: true,
 				filter: function(fileName){
-					if (fileName.match(/.scss$/) || fileName.match(/.sass$/)){
-						// Don't livereload when sass files are changed, the compiled .css will be enough
+					var fileExt = fileName.split('.').pop();
+					if (livereloadExclude.indexOf(fileExt) > -1){
 						return false;
 					}
 					else{
