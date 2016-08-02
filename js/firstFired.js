@@ -16,10 +16,9 @@ function getDefaultCity(){
 var myCity = getDefaultCity();
 
 function updateWeatherNowAsync() {
-	return //_locationPromise
-		myCity
+	return _locationPromise
 		.then(userLocation => weather.getWeatherInfoAsync(userLocation, "http://api.openweathermap.org/data/2.5/weather?q=", weatherAPIToken))
-		//.then(userLocation => weather.getWeatherInfoAsync(defaultCity, "http://api.openweathermap.org/data/2.5/weather?q=", weatherAPIToken))
+		.then(userLocation => weather.getWeatherInfoAsync(defaultCity, "http://api.openweathermap.org/data/2.5/weather?q=", weatherAPIToken))
 		.then(weather.getWeatherObj)
 		.then(weatherObj => {
 				weather.displayWeather(weatherObj);
