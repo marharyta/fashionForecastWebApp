@@ -20,7 +20,7 @@ var livereloadExclude = [
 ]
 
 gulp.task('styles', function() {
-	gulp.src(sourcePaths.styles)
+	return gulp.src(sourcePaths.styles)
 		.pipe(compass({
 			config_file:	'./config.rb',
 			css:			distPaths.styles,
