@@ -238,14 +238,7 @@ var weather = function(){
 			today = new Date(weather.getWeatherConditionObj(array[0]).date_time).getDate();
 			var currentObjDate = weather.getWeatherConditionObj(currentValue);
 			var currentDate = new Date(currentObjDate.date_time).getDate();
-			if( currentDate === today){
-				//debug
-				listOfdays.map(function(item){
-					if(item.day === today){
-						item.list.push(currentObjDate);
-					}
-				});
-			} else if(currentDate !== today){
+			if( currentDate === today || currentDate !== today){
 				var result = findInList(listOfdays,  currentDate);
 				if(result !== -1){
 					listOfdays[result].list.push(currentObjDate);
@@ -256,7 +249,6 @@ var weather = function(){
 					});
 				}
 			}
-
   			return  listOfdays;
 		});
 		return listSortedByDays;
