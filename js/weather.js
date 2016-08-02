@@ -14,12 +14,13 @@
 
 var weather = function(){
 	return {
-		convertToCelcius: convertToCelcius,
+		convertToCelciusFromKelvin: convertToCelciusFromKelvin,
 		displayWeather: displayWeather,
 		backgroundWeather: backgroundWeather,
 		displayTemperature: displayTemperature,
 		displayWind: displayWind,
 		displayLocation: displayLocation,
+		displayFeelsLike: displayFeelsLike,
 		httpRequestWeather: httpRequestWeather,
 		getWeatherInfoAsync: getWeatherInfoAsync,
 		getWeatherObj: getWeatherObj,
@@ -56,13 +57,74 @@ var weather = function(){
 
 	}
 
-	function convertToCelcius(temperature){
+	function convertToCelciusFromKelvin(temperature){
 		if((temperature - 273.15) >= 0){
 		 	return "+" + (temperature - 273.15).toFixed(0) + "°C";
-		}
-		else{
+		} else{
 			return "-" + (temperature - 273.15).toFixed(0) + "°C";
 		}
+	}
+
+	function convertToFahrenheitFromKelvin(temperature){
+		//T(°F) = T(K) × 9/5 - 459.67
+		return (temperature*(9/5)) - 459.67;
+	}
+
+	function convertToCelciusFromFahrenheit(temperature){
+		//T(°C) = (T(°F) - 32) × 5/9
+		return (temperature-32)*5/9;
+
+	}
+
+	function calculateFeelsLike(temperature, humidity, wind){
+		//calculate heat index
+		function heatIndex(temperature, humidity, wind){
+			/*if(convertToFahrenheit(temperature) >= 80 && humidity >= 40){
+				var HI = 0;
+				var R = humidity;
+				var T = convertToFahrenheit(temperature).toFixed(2);
+				var c1 = -42.379;
+				var c2 = 2.04901523;
+				var c3 = 10.14333127;
+				var c4 = -0.22475541;
+				var c5 = -0.00683783;
+				var c6 = -0.05481717;
+				var c7 = -0.00122874;
+				var c8 = 0.00085282;
+				var c9 = -0.00000199;
+
+				HI = c1 + (c2*T) + (c3*R) + (c4*T*R) + (c5*T*T) + (c6*R*R) + (c7*T*T*R) + (c8*T*R*R) + (c9*T*T*R*R);
+				return HI;
+			} 	
+			else {*/
+				var HI = 0;
+				var R = humidity;
+				var T = convertToFahrenheitFromKelvin(temperature).toFixed(2);
+				var c1 = 16.923;
+				var c2 = 0.185212;
+				var c3 = 5.37941;
+				var c4 = -0.100254;
+				var c5 = 9.41695 * Math.pow(10, -3);
+				var c6 = 7.28898 * Math.pow(10, -3);
+				var c7 = 3.45372 * Math.pow(10, -4);
+				var c8 = -8.14971 *  Math.pow(10, -4);
+				var c9 = 1.02102 * Math.pow(10, -5);
+				var c10 = -3.8646 * Math.pow(10, -5);
+				var c11 = 2.91583 * Math.pow(10, -5);
+				var c12 = 1.42721 *  Math.pow(10, -6);
+				var c13 = 1.97483 * Math.pow(10, -7);
+				var c14 = -2.18429 * Math.pow(10, -8);
+				var c15 = 8.43296 * Math.pow(10, -10);
+				var c16 = -4.81975 * Math.pow(10, -11);
+
+				HI = c1 + c2*T + c3*R + c4*T*R + c5*Math.pow(T, 2) + c6*Math.pow(R, 2) + c7*Math.pow(T, 2)*R + c8*T*Math.pow(R, 2) + c9*Math.pow(T, 2)*Math.pow(R, 2) + c10*Math.pow(T, 3) + c11* Math.pow(R, 3) + c12*Math.pow(T, 3)*R + c13*T*Math.pow(R, 3) + c14*Math.pow(T, 3)*Math.pow(R, 2) + c15*Math.pow(T, 2)*Math.pow(R, 3) + c16*Math.pow(T, 3)*Math.pow(R, 3); 
+				return HI; 
+			//}
+
+			//HI = 0.5 * {T + 61.0 + [(T-68.0)*1.2] + (RH*0.094)}
+
+		}
+		return convertToCelciusFromFahrenheit(heatIndex(temperature, humidity, wind)).toFixed(0);
 	}
 
 	function displayLocation(weatherLocation){
@@ -74,13 +136,19 @@ var weather = function(){
 	function displayTemperature(weatherTemp){
 		document.getElementById("temperature").innerHTML = weatherTemp;
 	}
+	function displayFeelsLike(weatherTempKelvin, weatherHumidity, weatherWind){
+		var calculatedFeelsLike = calculateFeelsLike(weatherTempKelvin, weatherHumidity, weatherWind);
+		document.getElementById("feelslike").innerHTML = "Feels Like " + calculatedFeelsLike;
+	}
 	function displayWeather(weatherObject){
-		var  condition  = weatherObject.weather;
+		var condition = weatherObject.weather;
 	 	this.backgroundWeather(condition);
 	 	this.displayTemperature(weatherObject.tempCelsius);
 	 	this.displayWind(weatherObject.wind);
+	 	this.displayFeelsLike(weatherObject.tempKelvin, weatherObject.humidity, weatherObject.wind);
 	 	
 	}
+	
 
 	/*
 
@@ -161,7 +229,9 @@ var weather = function(){
 		weatherObj.wind =  weatherData.wind.speed + " m/s";
 		weatherObj.weather = weatherData.weather[0].description || undefined;
 		weatherObj.location = weatherData.name || undefined;
-		weatherObj.tempCelsius = weather.convertToCelcius(weatherData.main.temp) || undefined;
+		weatherObj.tempCelsius = weather.convertToCelciusFromKelvin(weatherData.main.temp) || undefined;
+		weatherObj.tempKelvin = weatherData.main.temp || undefined;
+		weatherObj.humidity = weatherData.main.humidity;
 		
 		return weatherObj;
 	}
@@ -193,8 +263,8 @@ var weather = function(){
 		weatherObj.clouds = weatherDataListItem.clouds || undefined;
 		weatherObj.wind =  weatherDataListItem.wind+ " m/s";
 		weatherObj.description = weatherDataListItem.maindescription|| undefined;
-		weatherObj.temp_max = weather.convertToCelcius(weatherDataListItem.temp_max) || undefined;
-		weatherObj.temp_min =  weather.convertToCelcius(weatherDataListItem.temp_min)  || undefined;
+		weatherObj.temp_max = weather.convertToCelciusFromKelvin(weatherDataListItem.temp_max) || undefined;
+		weatherObj.temp_min =  weather.convertToCelciusFromKelvin(weatherDataListItem.temp_min)  || undefined;
 		weatherObj.rain = weatherDataListItem.rain;
 		
 		return weatherObj;
@@ -269,6 +339,8 @@ var weather = function(){
 			li.className = "inline-list";
 			ul.appendChild(li);
 			li.appendChild(date);
+			var calculatedWidth = (100/listSortedByDays.length).toFixed();
+			li.style.width =  calculatedWidth + "%";
 		};
 	}
 	
