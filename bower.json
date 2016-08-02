@@ -1,0 +1,21 @@
+{
+  "name": "fashionForecastWebApp",
+  "description": "Fashion Forecast App",
+  "main": "index.js",
+  "authors": [
+    "Vas <contact@vasily.cc>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/marharyta/fashionForecastWebApp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8"
+  }
+}
