@@ -59,9 +59,9 @@ var weather = function(){
 
 	function convertToCelciusFromKelvin(temperature){
 		if((temperature - 273.15) >= 0){
-		 	return "+" + (temperature - 273.15).toFixed(0) + "°C";
+		 	return "+" + (temperature - 273.15).toFixed(0);
 		} else{
-			return "-" + (temperature - 273.15).toFixed(0) + "°C";
+			return "-" + (temperature - 273.15).toFixed(0);
 		}
 	}
 
@@ -79,8 +79,8 @@ var weather = function(){
 	function calculateFeelsLike(temperature, humidity, wind){
 		//calculate heat index
 		function heatIndex(temperature, humidity, wind){
-			/*if(convertToFahrenheit(temperature) >= 80 && humidity >= 40){
-				var HI = 0;
+			if(convertToFahrenheitFromKelvin(temperature) >= 80 && humidity >= 40){
+				/*var HI = 0;
 				var R = humidity;
 				var T = convertToFahrenheit(temperature).toFixed(2);
 				var c1 = -42.379;
@@ -119,12 +119,54 @@ var weather = function(){
 
 				HI = c1 + c2*T + c3*R + c4*T*R + c5*Math.pow(T, 2) + c6*Math.pow(R, 2) + c7*Math.pow(T, 2)*R + c8*T*Math.pow(R, 2) + c9*Math.pow(T, 2)*Math.pow(R, 2) + c10*Math.pow(T, 3) + c11* Math.pow(R, 3) + c12*Math.pow(T, 3)*R + c13*T*Math.pow(R, 3) + c14*Math.pow(T, 3)*Math.pow(R, 2) + c15*Math.pow(T, 2)*Math.pow(R, 3) + c16*Math.pow(T, 3)*Math.pow(R, 3); 
 				return HI; 
-			//}
+			} else{
+				return convertToFahrenheitFromKelvin(temperature).toFixed(0);
+			}
 
 			//HI = 0.5 * {T + 61.0 + [(T-68.0)*1.2] + (RH*0.094)}
 
 		}
-		return convertToCelciusFromFahrenheit(heatIndex(temperature, humidity, wind)).toFixed(0);
+
+		function windChillFactor(temperature, humidity, wind){
+			//based on info: http://www.primgidromet.ru/news/chto_takoe_temperatura_komforta/
+			//temperature = parseInt(weather.convertToCelciusFromKelvin(temperature));
+			var result = 0;
+			if(temperature >= 0){
+				if(wind < 5){
+					result = temperature - 1;
+				} else if (wind < 5 && wind < 10){
+					result = temperature - 6;
+				} else if(wind > 10){
+					//have no idea if this is accurate, just in case
+					result = temperature - 10;
+				} else{	}
+			} else if(temperature > -10 && temperature < 0){
+				if(wind < 5){
+					result = temperature - 2;
+				} else if (wind < 5 && wind < 10){
+					result = temperature - 8;
+				} else if(wind > 10){
+					//have no idea if this is accurate, just in case
+					result = temperature - 12;
+				} else{}
+			} else if(temperature > -20 && temperature < -10){
+				if(wind < 5){
+					result = temperature - 3;
+				} else if (wind < 5 && wind < 10){
+					result = temperature - 10;
+				} else if(wind > 10){
+					//have no idea if this is accurate, just in case
+					result = temperature - 16;
+				} else{}
+			} else{
+				if(wind > 2){
+					result = temperature - 10;
+				}
+			}
+			return temperature;
+		}
+		return windChillFactor(convertToCelciusFromFahrenheit(heatIndex(temperature, humidity, wind)).toFixed(0), humidity, wind);
+		//return convertToCelciusFromFahrenheit(heatIndex(temperature, humidity, wind)).toFixed(2);
 	}
 
 	function displayLocation(weatherLocation){
