@@ -16,9 +16,14 @@
     "url": "https://github.com/marharyta/fashionForecastWebApp/issues"
   },
   "devDependencies": {
+    "bower": "^1.7.9",
     "gulp": "^3.9.1",
     "gulp-compass": "^2.1.0",
     "gulp-sass": "^2.3.2",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "wiredep": "^4.0.0"
+  },
+  "dependencies": {
+    "wiredep": "^4.0.0"
   }
 }

@@ -1,7 +1,8 @@
 var gulp		= require('gulp'),
 	sass		= require('gulp-sass'),
 	compass		= require('gulp-compass'),
-	webserver	= require('gulp-webserver');
+	webserver	= require('gulp-webserver'),
+	wiredep		= require('wiredep').stream;
 
 var sourcePaths = {
 	styles: ['sass/**/*.sass', 'sass/**/*.scss']
@@ -29,6 +30,12 @@ gulp.task('styles', function() {
 		.pipe(sass().on('error', sass.logError))
 });
 
+gulp.task('bower', function () {
+	return gulp.src('./index.html')
+		.pipe(wiredep())
+		.pipe(gulp.dest('./'));
+});
+
 gulp.task('watch',function() {
 	gulp.watch(sourcePaths.styles,['styles']);
 });
@@ -54,4 +61,4 @@ gulp.task('webserver', function() {
 		}));
 });
 
-gulp.task('serve', ['watch', 'webserver']);
+gulp.task('serve', ['bower', 'watch', 'webserver']);
