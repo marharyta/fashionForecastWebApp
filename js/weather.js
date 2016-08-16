@@ -78,6 +78,7 @@ var weather = function(){
 
 	function calculateFeelsLike(temperature, humidity, wind){
 		//calculate heat index
+		var HI = 0;
 		function heatIndex(temperature, humidity, wind){
 			if(convertToFahrenheitFromKelvin(temperature) >= 80 && humidity >= 40){
 				/*var HI = 0;
@@ -97,7 +98,7 @@ var weather = function(){
 				return HI;
 			} 	
 			else {*/
-				var HI = 0;
+			/*	var HI = 0;
 				var R = humidity;
 				var T = convertToFahrenheitFromKelvin(temperature).toFixed(2);
 				var c1 = 16.923;
@@ -119,6 +120,32 @@ var weather = function(){
 
 				HI = c1 + c2*T + c3*R + c4*T*R + c5*Math.pow(T, 2) + c6*Math.pow(R, 2) + c7*Math.pow(T, 2)*R + c8*T*Math.pow(R, 2) + c9*Math.pow(T, 2)*Math.pow(R, 2) + c10*Math.pow(T, 3) + c11* Math.pow(R, 3) + c12*Math.pow(T, 3)*R + c13*T*Math.pow(R, 3) + c14*Math.pow(T, 3)*Math.pow(R, 2) + c15*Math.pow(T, 2)*Math.pow(R, 3) + c16*Math.pow(T, 3)*Math.pow(R, 3); 
 				return HI; 
+
+				*/
+
+				if (temperature >= 80) {
+					
+					var h = humidity;
+					var t = convertToFahrenheitFromKelvin(temperature).toFixed(2);
+		            var heatIndexBase = (-42.379                      +
+		                                   2.04901523 * t             +
+		                                  10.14333127         * h     +
+		                                  -0.22475541 * t     * h     +
+		                                  -0.00683783 * t * t         +
+		                                  -0.05481717         * h * h +
+		                                   0.00122874 * t * t * h     +
+		                                   0.00085282 * t     * h * h +
+		                                  -0.00000199 * t * t * h * h);
+		            // adjustment
+		            if (h < 13 && t <= 112) {
+		                HI = heatIndexBase - (13 - h) / 4 * Math.sqrt((17 - Math.abs(t - 95)) / 17);
+		            } else if (h > 85 && t <= 87) {
+		                HI = heatIndexBase + ((h - 85) / 10) * ((87 - t) / 5);
+		            } else {
+		                HI = heatIndexBase;
+		            }
+		        }
+		        return HI;
 			} else{
 				return convertToFahrenheitFromKelvin(temperature).toFixed(0);
 			}
@@ -388,69 +415,55 @@ var weather = function(){
 	
 }();
 
-/*
-
-
-
-function displayImages(response){
-	var length = JSON.parse(response).data.length;
-		for (var i = 0; i < length; i++) {
-			var image = document.createElement("IMG");
-			image.src = JSON.parse(response).data[i].images.standard_resolution.url;
-			document.getElementById("insta").appendChild(image); 
-		};
-}
-
-
-
-function httpRequestHashtag (url) {
-  return new Promise(function(resolve, reject) {
-    var instaRequest = new XMLHttpRequest();
-    instaRequest.open("GET", url, true);
-
-	instaRequest.onreadystatechange = function() {
-	  	if(this.readyState == 0){
-	  		//console.log("request not initialized ");
-	  	}
-	  	else if(this.readyState == 1){
-	  		//console.log("server connection established");
-	  	}
-	  	else if(this.readyState == 2){
-	  		//console.log(" request received ");
-	  	}
-	  	else if(this.readyState == 3){
-	  		//console.log(" processing request ");
-	  	}
-	    else if (this.readyState == 4 && this.status == 200) {
-	     	//console.log("request finished and response is ready");
-	     	resolve(this.response);
-	    }
-	    else{
-	    	reject(this.response);
-	    }
-	  };
-  	instaRequest.send();
-  });
-
-}
-*/
-
-
 
 /*
-function requestSpringOutfit() {
-	resetDOM();
-	var imgContainer = document.getElementById("insta");
-	if (imgContainer.hasChildNodes()) {
-		for (var i = imgContainer.childNodes.length - 1; i >= 0; i--) {
-			 imgContainer.removeChild(imgContainer.childNodes[0]);
-		};
-	}
-	weatherData = getTagName("hi");
-	returnResponseFromInstaPromise(weatherData);
-}
 
-*/
+heatIndex: function (input) {
+        if (arguments.length === 0) {
+            throw new Error("Invalid Argument. Need at least one.");
+        }
+        if (HI.getType(input) !== 'Object') {
+            throw new TypeError("Invalid Argument. Expecting 'Object'");
+        }
+        if (HI.getType(input.temperature) !== 'Number' ||
+            HI.getType(input.humidity) !== 'Number') {
+            throw new TypeError("Invalid Argument. temperature and humidity must be 'Number'");
+        }
+
+        var t = HI.toFahrenheit(input.temperature) || 0,
+            h = input.humidity || 0;
+
+        if (input.fahrenheit) {
+            t = input.temperature;
+        }
+
+        // Steadman's result
+        var heatIndex = 0.5 * (t + 61 + (t - 68) * 1.2 + h * 0.094);
+
+        // regression equation of Rothfusz is appropriate
+        if (t >= 80) {
+            var heatIndexBase = (-42.379                      +
+                                   2.04901523 * t             +
+                                  10.14333127         * h     +
+                                  -0.22475541 * t     * h     +
+                                  -0.00683783 * t * t         +
+                                  -0.05481717         * h * h +
+                                   0.00122874 * t * t * h     +
+                                   0.00085282 * t     * h * h +
+                                  -0.00000199 * t * t * h * h);
+            // adjustment
+            if (h < 13 && t <= 112) {
+                heatIndex = heatIndexBase - (13 - h) / 4 * Math.sqrt((17 - Math.abs(t - 95)) / 17);
+            } else if (h > 85 && t <= 87) {
+                heatIndex = heatIndexBase + ((h - 85) / 10) * ((87 - t) / 5)
+            } else {
+                heatIndex = heatIndexBase;
+            }
+        }
+        return (input.fahrenheit ? heatIndex : HI.toCelsius(heatIndex));
+    }
+
+    */
 
 
 
