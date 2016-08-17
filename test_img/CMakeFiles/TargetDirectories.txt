@@ -1,3 +1,0 @@
-/Users/marharyta/Desktop/myProjRepo/fashionForecastWebApp/test_img/CMakeFiles/edit_cache.dir
-/Users/marharyta/Desktop/myProjRepo/fashionForecastWebApp/test_img/CMakeFiles/rebuild_cache.dir
-/Users/marharyta/Desktop/myProjRepo/fashionForecastWebApp/test_img/CMakeFiles/BlurImage.dir
