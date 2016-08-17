@@ -17,7 +17,7 @@ int main( int argc, char** argv )
     imshow("Unprocessed Image",src);
 
     dst = src.clone();
-    GaussianBlur( src, dst, Size( 15, 15 ), 0, 0 );
+    ///GaussianBlur( src, dst, Size( 15, 15 ), 0, 0 );
     medianBlur ( src, dst, 15 );
     namedWindow( window_name2, WINDOW_AUTOSIZE );
     imshow("Processed Image",dst);
